@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Baby Girl!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #FFF0F5;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            z-index: 10;
+        }
+        .header {
+            background-color: #FF9FF3;
+            color: white;
+            padding: 15px;
+            font-family: 'Pacifico', cursive;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .content {
+            padding: 25px;
+        }
+        #babyImage {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        #quoteContent {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+            min-height: 60px;
+        }
+        .button {
+            background-color: #FF9FF3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #FF85EA;
+        }
+        .footer {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .balloon {
+            position: fixed;
+            width: 60px;
+            height: 80px;
+            background-color: #FF9FF3;
+            border-radius: 50%;
+            bottom: -100px;
+            animation: float 20s infinite linear;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            z-index: 20;
+        }
+        .balloon::before {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: inherit;
+            bottom: -6px;
+            transform: rotate(45deg);
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-120vh) rotate(360deg); }
+        }
+        #nameDisplay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 159, 243, 0.9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            z-index: 100;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome Baby Girl</h1>
+        </div>
+        <div class="content">
+            <img id="babyImage" src="images/1.webp" alt="Cute baby">
+            <p id="quoteContent">Loading...</p>
+            <button class="button" onclick="updateContent()">New Quote</button>
+        </div>
+        <div class="footer">
+            <p>Congratulations on your new bundle of joy!</p>
+            <p>Pop the balloons to reveal baby name ideas!</p>
+        </div>
+            <div class="footer-note" style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #555; background-color: #ffe6e6; padding: 10px; border-radius: 5px;">
+                <p>Made with love ❤️ by Uncle Mike</p>
+            </div>
+    </div>
+    <div id="nameDisplay"></div>
+    <script>
+        const quotes = [
+            "A new baby is like the beginning of all things - wonder, hope, a dream of possibilities. - Eda J. Le Shan",
+            "A baby girl is a miracle that never ceases to be miraculous. - Unknown",
+            "Why don’t pregnant women go on diets? Because they’re already expecting a lot!",
+            "What did the pregnant woman say when her water broke? “It’s time for the baby to be born, not for a swimming lesson!”",
+            "What’s a pregnant woman’s favorite game? Kickball – especially when the baby gets involved!",
+            "How do pregnant women get over their fears? They push through!",
+            "Let her sleep, for when she wakes, she will move mountains. - Napoleon",
+            "How do you organize a space-themed baby shower? You planet!",
+            "And though she be but little, she is fierce. - William Shakespeare",
+            "Why don’t scientists trust atoms? Because they make up everything... just like pregnancy cravings!",
+            "A baby daughter is always a Daddy's girl and Mommy's world. - Unknown",
+            "Why don’t pregnant women play hide and seek? Because good luck hiding that bump!",
+            "Baby girls are precious gifts, wrapped in love serene. Their dresses tied with sashes and futures tied with dreams. - Unknown",
+            "A daughter is one of the most beautiful gifts this world has to give. - Laurel Atherton",
+            "Why don’t pregnant women tell secrets? Because there’s a baby inside them, and it might overhear!",
+            "What do you call a musical about pregnancy? Mamma Mia!",
+            "What do you call a cow that’s expecting? Moo-ther-to-be!",
+            "The littlest feet make the biggest footprints in our hearts.",
+            "What did the expectant mother say to her baby bump? You’re my favorite bump in the road!",
+            "She is proof that love before first sight does exist.",
+            "Fun Fact: Babies can hear sounds from the outside world at around 18 weeks of pregnancy.",
+            "Fun Fact: At birth, a baby's brain is about one-third the size of an adult brain and grows rapidly in the first year.",
+            "Fun Fact: A baby’s fingerprints are set by the time they are 3 months old in the womb.",
+            "Fun Fact: Babies can recognize their mother's voice from the womb and will respond to it after birth.",
+            "Fun Fact: By the end of pregnancy, the baby’s bones are hardening but the skull remains soft and flexible for birth.",
+            "Fun Fact: Newborns can only see about 8 to 12 inches away – just the right distance to see their mother's face when being held.",
+            "Fun Fact: The sense of smell is one of the first senses to develop in babies; they can recognize their mother's scent shortly after birth.",
+            "Fun Fact: Babies are born with about 300 bones, but as they grow, some bones fuse together, resulting in 206 bones in adults.",
+            "Fun Fact: Babies can taste sweet, sour, and bitter flavors in the womb through the amniotic fluid.",
+            "Fun Fact: The placenta, which nourishes the baby in the womb, is the only organ the body creates solely for pregnancy.",
+            "Fun Fact: Babies have more taste buds than adults, some of which are on the sides and roof of the mouth, as well as the tongue.",
+            "Fun Fact: During the last trimester, the baby is practicing breathing by inhaling and exhaling amniotic fluid.",
+            "Fun Fact: Babies are born with a natural grasp reflex – they can hold onto your finger tightly right after birth.",
+            "Fun Fact: The umbilical cord typically measures about 20 inches long at birth.",
+            "What’s the difference between a pregnant woman and a terrorist?\n\nYou can negotiate with a terrorist.",
+            "Fun Fact: A baby’s heart starts to beat around 5 to 6 weeks into pregnancy and can be seen on an ultrasound.",
+            "What did the mother bee say to her baby bee? Bee-have!",
+            "Why did the expectant mother start a vegetable garden? To get ready for her little sprout!",
+            "Why did the pregnant woman bring a flashlight to bed? To find her way to the bathroom in the middle of the night!",
+            "Why do pregnant women make good managers? Because they are always expecting great results!",
+            "A baby fills a place in your heart you never knew was empty.",
+            "A baby is something you carry inside you for nine months, in your arms for three years, and in your heart until you die.",
+            "A mother’s joy begins when new life is stirring inside, when a tiny heartbeat is heard for the very first time, and a playful kick reminds her that she is never alone.",
+            "What’s the difference between a nine-month pregnant woman and a supermodel? \n\nNothing—if the pregnant woman’s partner knows what’s good for them.",
+            "How do you win any argument? \n\nBe pregnant. That’s it! You’re done.",
+            "The more pregnant I get, the more strangers smile at me. Why?\n\nBecause you’re fatter than they are, obviously."
+
+    
+        ];
+
+        const images = [
+            "images/1.webp",
+            "images/2.webp",
+            "images/3.webp",
+            "images/4.webp",
+            "images/5.webp",
+            "images/6.webp",
+            "images/7.webp",
+            "images/8.webp",
+            "images/9.webp"
+        ];
+
+        const babyNames = ["Michealla",
+        "Anesu", "Chenai", "Chipo", "Fadzai", "Kudzai",  "Makanaka", "Mudiwa", "Nyasha", "Ruvimbo", 
+        "Tafadzwa", "Tarisai", "Tariro", "Vimbai", "Bongie", "Duduzile", "Gugulethu", 
+        "Langelihle", "Mbali", "Nobuhle",, "Thandeka", "Sibongile",
+        "Nokuthula", "Nomusa", "Nothando", "Ntombizodwa", "Sithandazile", 
+        "Thandile", "Thobeka", "Zanele", "Abigail", "Amelia", 
+        "Ava", "Charlotte", "Chloe", "Emily", "Emma", 
+        "Grace", "Isabella", "Sophia", "Olivia", "Emma", "Ava", "Charlotte", 
+        "Amelia", "Isabella", "Mia", "Evelyn", "Harper",
+        "Luna", "Camila", "Gianna", "Elizabeth", "Eleanor",
+        "Ropafadzo", "Runako","Wadzanai", "Ayanda", "Buhle", 
+        "Ntabiso", "Phumzile", "Sanelisiwe", "Sibahle", "Sibongile", 
+        "Ella", "Abigail", "Sofia", "Avery", "Scarlett",
+        "Emily", "Aria", "Penelope", "Chloe", "Layla",
+        "Mila", "Nora", "Hazel", "Madison", "Ellie",
+        "Lily", "Nova", "Isla", "Grace", "Violet",
+        "Aurora", "Riley", "Zoey", "Willow", "Emilia"
+        ];
+
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function updateContent() {
+            const content = getRandomItem(quotes);
+            const imageUrl = getRandomItem(images);
+            document.getElementById('quoteContent').textContent = content;
+            document.getElementById('babyImage').src = imageUrl;
+        }
+
+        function createBalloons() {
+            const colors = ['#FF9FF3', '#FFC0CB', '#FFB6C1', '#FFA07A', '#FF69B4'];
+            for (let i = 0; i < 30; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = `${(100 / 30) * (i + 0.5)}%`;
+                balloon.style.animationDelay = `${Math.random() * 20}s`;
+                balloon.style.backgroundColor = getRandomItem(colors);
+                balloon.textContent = "Pop!";
+                balloon.onclick = function() { popBalloon(this); };
+                document.body.appendChild(balloon);
+            }
+        }
+
+        function popBalloon(balloon) {
+            const name = getRandomItem(babyNames);
+            const nameDisplay = document.getElementById('nameDisplay');
+            nameDisplay.textContent = name;
+            nameDisplay.style.display = 'block';
+            setTimeout(() => { nameDisplay.style.display = 'none'; }, 2000);
+            balloon.remove();
+        }
+
+        window.onload = function() {
+            updateContent();
+            createBalloons();
+        }
+    </script>
+</body>
+</html>
