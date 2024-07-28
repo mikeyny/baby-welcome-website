@@ -43,7 +43,7 @@ A delightful and interactive website to celebrate the arrival of a baby girl. I 
 You can easily customize various aspects of the website:
 
 - **Quotes**: Edit the `quotes` array in the JavaScript section to add or modify quotes.
-- **Images**: Replace the placeholder image URLs in the `images` array with actual baby-related image URLs.
+- **Images**: Replace the placeholder image URLs in the `images` array with actual baby-related image URLs. You can use Dall-E to generate beautiful images like I did here.
 - **Baby Names**: Modify the `babyNames` array to change the list of baby names that appear when balloons are popped.
 - **Colors**: Adjust the color scheme by editing the CSS variables and balloon colors in the JavaScript.
 
